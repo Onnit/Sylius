@@ -11,6 +11,20 @@ Feature: Shipments
             | German lands | country | Germany, Austria, Switzerland |
             | UK + Poland  | country | United Kingdom, Poland        |
             | USA          | country | United States                 |
+          And there are following tax categories:
+            | name    |
+            | General |
+          And there are products:
+            | name          | price | tax category |
+            | Mug           | 5.99  | General      |
+            | Sticker       | 10.00 | General      |
+          And the following tax rates exist:
+            | category | zone         | name | amount |
+            | General  | German lands | VAT  | 23     |
+          And there are following shipping categories:
+            | name    |
+            | Regular |
+            | Heavy   |
           And the following shipping methods exist:
             | category | zone         | name        |
             | Regular  | USA          | FedEx       |

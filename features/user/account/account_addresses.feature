@@ -9,13 +9,12 @@ Feature: User account addresses page
           And there is default channel configured
           And I am logged in user
           And the following countries exist:
-            | name          | enabled |
-            | Germany       | yes     |
-            | Austria       | yes     |
-            | Poland        | yes     |
-            | Finland       | yes     |
-            | United States | yes     |
-            | Ukraine       | no      |
+            | name          |
+            | Germany       |
+            | Austria       |
+            | Poland        |
+            | Finland       |
+            | United States |
           And the following addresses exist:
             | user               | address                                               |
             | sylius@example.com | Jan Kowalski, Heine-Straße 12, 99734, Berlin, Germany |

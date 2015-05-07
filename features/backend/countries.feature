@@ -88,6 +88,41 @@ Feature: Countries and provinces
          When I click "edit" near "China"
          Then I should be editing country "China"
 
+    Scenario: Updating the country and province
+        Given I am editing country "Ukraine"
+         When I select "Russia" from "Name"
+          And I fill in province name with "Volgograd"
+          And I press "Save changes"
+         Then I should be on the page of country "Russia"
+          And "Russia" should appear on the page
+
+    @javascript
+    Scenario: Updating the country and removing province
+      Given I am editing country "Ukraine"
+       When I select "Russia" from "Name"
+        And I remove all the provinces
+        And I press "Save changes"
+       Then I should see "Country has been successfully updated."
+        And "Russia" should appear on the page
+        But I should not see "Provinces"
+
+    @javascript
+    Scenario: Deleting country via the list
+        Given I am on the country index page
+         When I press "delete" near "China"
+          And I click "delete" from the confirmation modal
+         Then I should still be on the country index page
+          And I should see "Country has been successfully deleted."
+          But I should not see country with name "China" in the list
+
+    @javascript
+    Scenario: Deleting country
+        Given I am on the page of country "China"
+         When I press "delete"
+          And I click "delete" from the confirmation modal
+         Then I should be on the country index page
+          And I should see "Country has been successfully deleted."
+
     Scenario: Accessing country details via the list
         Given I am on the country index page
          When I click "China"

@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Symfony\Component\Intl\Intl;
 
 class AddressingContext extends DefaultContext
 {
@@ -58,9 +59,13 @@ class AddressingContext extends DefaultContext
         if (null === $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))) {
             $country = $this->getRepository('country')->createNew();
             $country->setIsoName(trim($isoName));
-            $country->setEnabled($enabled);
 
-            $this->addProvincesToCountry($country, $provinces);
+            if (null !== $provinces) {
+                $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
+                foreach ($provinces as $provinceName) {
+                    $country->addProvince($this->thereisProvince($provinceName));
+                }
+            }
 
             $manager = $this->getEntityManager();
             $manager->persist($country);
@@ -144,35 +149,5 @@ class AddressingContext extends DefaultContext
         $this->getEntityManager()->persist($province);
 
         return $province;
-    }
-
-    /**
-     * @When /^store owner set country "([^"]*)" as disabled$/
-     */
-    public function storeOwnerSetCountryAsDisabled($name)
-    {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
-
-        /** @var CountryInterface $country */
-        $country = $this->getRepository("country")->findOneBy(array('isoName' => $isoName));
-        $country->setEnabled(false);
-
-        $manager = $this->getEntityManager();
-        $manager->persist($country);
-        $manager->flush();
-    }
-
-    /**
-     * @param CountryInterface $country
-     * @param TableNode|array $provinces
-     */
-    private function addProvincesToCountry($country, $provinces)
-    {
-        if (null !== $provinces) {
-            $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
-            foreach ($provinces as $provinceName) {
-                $country->addProvince($this->thereisProvince($provinceName));
-            }
-        }
     }
 }

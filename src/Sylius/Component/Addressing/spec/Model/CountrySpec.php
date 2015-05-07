@@ -44,11 +44,6 @@ class CountrySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
     }
 
-    function it_has_no_id_by_default()
-    {
-        $this->getId()->shouldReturn(null);
-    }
-
     function it_has_a_name()
     {
         $this->setIsoName('VE');
@@ -127,33 +122,11 @@ class CountrySpec extends ObjectBehavior
         $this->removeProvince($province);
     }
 
-    function it_is_enabled_by_default()
-    {
-        $this->isEnabled()->shouldReturn(true);
-    }
-
-    function it_can_be_disabled()
-    {
-        $this->disable();
-        $this->isEnabled()->shouldReturn(false);
-    }
-
-    function it_can_be_enabled()
-    {
-        $this->disable();
-        $this->isEnabled()->shouldReturn(false);
-
-        $this->enable();
-        $this->isEnabled()->shouldReturn(true);
-    }
-
-    function it_can_set_enabled_value()
-    {
-        $this->setEnabled(false);
-        $this->isEnabled()->shouldReturn(false);
-
-        $this->setEnabled(true);
-        $this->isEnabled()->shouldReturn(true);
+    function it_has_fluent_interface(
+        ProvinceInterface $province,
+        Collection $provinces
+    ) {
+        $this->setIsoName('PL')->shouldReturn($this);
 
         $this->setEnabled(false);
         $this->isEnabled()->shouldReturn(false);

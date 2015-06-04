@@ -28,6 +28,7 @@
         </many-to-one>
 
         <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\AttributeValueInterface" mapped-by="subject" orphan-removal="true">
+            <join-column name="product_id" referenced-column-name="products_id" />
             <cascade>
                 <cascade-all />
             </cascade>
@@ -35,6 +36,7 @@
         </one-to-many>
 
         <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\VariantInterface" mapped-by="object" orphan-removal="true">
+            <join-column name="product_id" referenced-column-name="products_id" />
             <cascade>
                 <cascade-all />
             </cascade>
@@ -47,7 +49,7 @@
             </cascade>
             <join-table name="sylius_product_options">
                 <join-columns>
-                    <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />
+                    <join-column name="product_id" referenced-column-name="products_id" nullable="false" unique="false" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="option_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />

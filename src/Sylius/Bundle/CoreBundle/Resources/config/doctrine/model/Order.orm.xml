@@ -23,7 +23,7 @@
             <cascade>
                 <cascade-persist/>
             </cascade>
-            <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
+            <join-column name="shipping_address_id" referenced-column-name="address_book_id" nullable="true" />
             <gedmo:versioned />
         </many-to-one>
 
@@ -31,7 +31,7 @@
             <cascade>
                 <cascade-persist/>
             </cascade>
-            <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
+            <join-column name="billing_address_id" referenced-column-name="address_book_id" nullable="true" />
             <gedmo:versioned />
         </many-to-one>
 
@@ -39,7 +39,7 @@
         <many-to-many field="promotionCoupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
             <join-table name="sylius_promotion_coupon_order">
                 <join-columns>
-                    <join-column name="order_id" referenced-column-name="id" />
+                    <join-column name="order_id" referenced-column-name="orders_id" />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="promotion_coupon_id" referenced-column-name="id" />
@@ -61,7 +61,7 @@
         </one-to-many>
 
         <many-to-one field="customer" target-entity="Sylius\Component\User\Model\CustomerInterface" inversed-by="orders">
-            <join-column name="customer_id" referenced-column-name="id" nullable="true" />
+            <join-column name="customer_id" referenced-column-name="customers_id" nullable="true" />
             <cascade>
                 <cascade-persist />
             </cascade>
@@ -70,7 +70,7 @@
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
             <join-table name="sylius_promotion_order">
                 <join-columns>
-                    <join-column name="order_id" referenced-column-name="id" />
+                    <join-column name="order_id" referenced-column-name="orders_id" />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="promotion_id" referenced-column-name="id" />

@@ -24,7 +24,7 @@
             <generator strategy="AUTO" />
         </id>
         <many-to-one field="belongsTo" target-entity="Sylius\Component\Addressing\Model\ZoneInterface" inversed-by="members">
-            <join-column name="belongs_to" referenced-column-name="id" />
+            <join-column name="belongs_to" referenced-column-name="geo_zone_id" />
         </many-to-one>
     </entity>
 

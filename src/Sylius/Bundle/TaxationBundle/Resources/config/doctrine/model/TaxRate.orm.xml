@@ -25,7 +25,7 @@
         <field name="calculator" column="calculator" type="string" />
 
         <many-to-one field="category" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface" inversed-by="rates">
-            <join-column name="category_id" referenced-column-name="id" nullable="false" />
+            <join-column name="category_id" referenced-column-name="tax_class_id" nullable="false" />
         </many-to-one>
 
         <field name="createdAt" column="created_at" type="datetime">

@@ -19,13 +19,13 @@
     <mapped-superclass name="Sylius\Component\Core\Model\Customer" table="sylius_customer">
         <field name="currency" length="3" nullable="true" />
         <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
-            <join-column name="billing_address_id" on-delete="SET NULL" />
+            <join-column name="billing_address_id" referenced-column-name="address_book_id" on-delete="SET NULL" />
             <cascade>
                 <cascade-persist />
             </cascade>
         </one-to-one>
         <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
-            <join-column name="shipping_address_id"  on-delete="SET NULL" />
+            <join-column name="shipping_address_id" referenced-column-name="address_book_id" on-delete="SET NULL" />
             <cascade>
                 <cascade-persist />
             </cascade>

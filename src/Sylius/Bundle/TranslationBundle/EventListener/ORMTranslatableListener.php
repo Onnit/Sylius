@@ -56,7 +56,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
         }
 
         if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslationInterface')) {
-            $this->mapTranslation($classMetadata);
+            $this->mapTranslation($classMetadata, $eventArgs);
         }
     }
 
@@ -89,7 +89,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
      *
      * @param ClassMetadata $metadata
      */
-    private function mapTranslation(ClassMetadata $metadata)
+    private function mapTranslation(ClassMetadata $metadata, LoadClassMetadataEventArgs $eventArgs)
     {
         // In the case A -> B -> TranslationInterface, B might not have mapping defined as it
         // is probably defined in A, so in that case, we just return.
@@ -97,13 +97,19 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
             return;
         }
 
+
+        $translatableMetadata = $eventArgs
+            ->getEntityManager()
+            ->getMetadataFactory()
+            ->getMetadataFor($this->configs[$metadata->name]['model']);
+
         $metadata->mapManyToOne(array(
-            'fieldName'    => 'translatable' ,
+            'fieldName'    => $translatableMetadata->associationMappings['translations']['mappedBy'],
             'targetEntity' => $this->configs[$metadata->name]['model'],
-            'inversedBy'   => 'translations' ,
+            'inversedBy'   => $translatableMetadata->associationMappings['translations']['fieldName'],
             'joinColumns'  => array(array(
                 'name'                 => 'translatable_id',
-                'referencedColumnName' => 'id',
+                'referencedColumnName' => $translatableMetadata->fieldMappings['id']['columnName'],
                 'onDelete'             => 'CASCADE',
                 'nullable'             => false,
             )),

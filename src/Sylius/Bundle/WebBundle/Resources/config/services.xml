@@ -111,34 +111,42 @@
             </call>
         </service>
 
-        <service id="sylius.menu.frontend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createMainMenu" scope="request">
+        <service id="sylius.menu.frontend.main" class="Knp\Menu\MenuItem" scope="request">
+            <factory service="sylius.menu_builder.frontend" method="createMainMenu" />
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.frontend.main" />
         </service>
-        <service id="sylius.menu.frontend.currency" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createCurrencyMenu">
+        <service id="sylius.menu.frontend.currency" class="Knp\Menu\MenuItem">
+            <factory service="sylius.menu_builder.frontend" method="createCurrencyMenu"/>
             <tag name="knp_menu.menu" alias="sylius.frontend.currency" />
         </service>
-        <service id="sylius.menu.frontend.locale" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.locale" factory-method="createMenu">
+        <service id="sylius.menu.frontend.locale" class="Knp\Menu\MenuItem">
+            <factory service="sylius.menu_builder.locale" method="createMenu" />
             <tag name="knp_menu.menu" alias="sylius.frontend.locale" />
         </service>
-        <service id="sylius.menu.frontend.taxonomies" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createTaxonomiesMenu" scope="request">
+        <service id="sylius.menu.frontend.taxonomies" class="Knp\Menu\MenuItem" scope="request">
+            <factory service="sylius.menu_builder.frontend" method="createTaxonomiesMenu"/>
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.frontend.taxonomies" />
         </service>
-        <service id="sylius.menu.frontend.account" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createAccountMenu" scope="request">
+        <service id="sylius.menu.frontend.account" class="Knp\Menu\MenuItem" scope="request">
+            <factory service="sylius.menu_builder.frontend" method="createAccountMenu"/>
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.frontend.account" />
         </service>
-        <service id="sylius.menu.frontend.social" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createSocialMenu" scope="request">
+        <service id="sylius.menu.frontend.social" class="Knp\Menu\MenuItem" scope="request">
+            <factory service="sylius.menu_builder.frontend" method="createSocialMenu" />
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.frontend.social" />
         </service>
 
-        <service id="sylius.menu.backend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.backend" factory-method="createMainMenu" scope="request">
+        <service id="sylius.menu.backend.main" class="Knp\Menu\MenuItem" scope="request">
+            <factory service="sylius.menu_builder.backend" method="createMainMenu" />
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.backend.main" />
         </service>
-        <service id="sylius.menu.backend.sidebar" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.backend" factory-method="createSidebarMenu" scope="request">
+        <service id="sylius.menu.backend.sidebar" class="Knp\Menu\MenuItem" scope="request">
+            <factory service="sylius.menu_builder.backend" method="createSidebarMenu" />
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.backend.sidebar" />
         </service>

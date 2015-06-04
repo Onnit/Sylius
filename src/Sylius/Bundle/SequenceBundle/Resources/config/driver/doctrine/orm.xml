@@ -24,7 +24,9 @@
         <service id="sylius.sequence.doctrine_number_listener" class="%sylius.sequence.doctrine_number_listener.class%">
             <argument type="service" id="sylius.registry.number_generator" />
             <argument type="service">
-                <service class="Doctrine\Common\EventManager" factory-service="doctrine.orm.entity_manager" factory-method="getEventManager" />
+                <service class="Doctrine\Common\EventManager">
+                    <factory service="doctrine.orm.entity_manager" method="getEventManager"/>
+                </service>
             </argument>
             <argument type="service" id="event_dispatcher" />
             <argument>%sylius.model.sequence.class%</argument>

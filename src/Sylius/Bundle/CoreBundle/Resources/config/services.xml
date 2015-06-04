@@ -200,11 +200,8 @@
             <argument type="service" id="sylius.tax_rate_resolver" />
             <argument type="service" id="sylius.zone_matcher" />
             <argument type="service">
-                <service
-                        factory-service="sylius.settings.manager"
-                        factory-method="loadSettings"
-                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
-                        >
+                <service class="Sylius\Bundle\SettingsBundle\Model\Settings">
+                    <factory service="sylius.settings.manager" method="loadSettings"/>
                     <argument>sylius_taxation</argument>
                 </service>
             </argument>
@@ -348,7 +345,8 @@
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
-                <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
+                <service class="Gaufrette\Filesystem">
+                    <factory service="knp_gaufrette.filesystem_map" method="get"/>
                     <argument>%sylius.uploader.filesystem%</argument>
                 </service>
             </argument>

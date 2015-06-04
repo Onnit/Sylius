@@ -26,12 +26,8 @@
         <service id="sylius.repository.inventory_unit" class="%sylius.repository.inventory_unit.class%">
             <argument type="service" id="sylius.manager.inventory_unit" />
             <argument type="service">
-                <service
-                    factory-service="doctrine_mongodb.odm.default_document_manager"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata"
-                    public="false"
-                >
+                <service class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata" public="false">
+                    <factory service="doctrine_mongodb.odm.default_document_manager" method="getClassMetadata"/>
                     <argument>%sylius.model.inventory_unit.class%</argument>
                 </service>
             </argument>
@@ -41,12 +37,8 @@
         <service id="sylius.repository.stockable" class="%sylius.repository.stockable.class%">
             <argument type="service" id="sylius.manager.stockable" />
             <argument type="service">
-                <service
-                    factory-service="doctrine_mongodb.odm.default_document_manager"
-                    factory-method="getClassMetadata"
-                    class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata"
-                    public="false"
-                >
+                <service class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata" public="false">
+                    <factory service="doctrine_mongodb.odm.default_document_manager" method="getClassMetadata"/>
                     <argument>%sylius.model.stockable.class%</argument>
                 </service>
             </argument>

@@ -34,7 +34,9 @@
     <services>
         <service id="sylius.controller.cart" class="%sylius.controller.cart.class%">
             <argument type="service">
-                <service factory-service="sylius.controller.configuration_factory" factory-method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
+                <!-- <service factory&#45;service="sylius.controller.configuration_factory" factory&#45;method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration"> -->
+                <service class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
+                    <factory service="sylius.controller.configuration_factory" method="createConfiguration"/>
                     <argument>sylius</argument>
                     <argument>cart</argument>
                     <argument>SyliusCartBundle:Cart</argument>
@@ -47,7 +49,9 @@
 
         <service id="sylius.controller.cart_item" class="%sylius.controller.cart_item.class%">
             <argument type="service">
-                <service factory-service="sylius.controller.configuration_factory" factory-method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
+                <!-- <service factory&#45;service="sylius.controller.configuration_factory" factory&#45;method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration"> -->
+                <service class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
+                    <factory service="sylius.controller.configuration_factory" method="createConfiguration"/>
                     <argument>sylius</argument>
                     <argument>cart_item</argument>
                     <argument>SyliusCartBundle:CartItem</argument>

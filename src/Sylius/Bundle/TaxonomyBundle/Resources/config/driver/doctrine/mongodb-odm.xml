@@ -23,20 +23,12 @@
 
     <services>
         <service id="sylius.manager.taxonomy" alias="doctrine.odm.mongodb.document_manager" />
-        <service id="sylius.doctrine.odm.mongodb.metadata.taxonomy"
-            factory-service="sylius.manager.taxonomy"
-            factory-method="getClassMetadata"
-            class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata"
-            public="false"
-                >
+        <service id="sylius.doctrine.odm.mongodb.metadata.taxonomy" class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata" public="false">
+            <factory service="sylius.manager.taxonomy" method="getClassMetadata"/>
             <argument>%sylius.model.taxonomy.class%</argument>
         </service>
-        <service id="sylius.doctrine.odm.mongodb.unitOfWork"
-                factory-service="doctrine.odm.mongodb.document_manager"
-                factory-method="getUnitOfWork"
-                class="Doctrine\ODM\MongoDB\UnitOfWork"
-                public="false"
-        >
+        <service id="sylius.doctrine.odm.mongodb.unitOfWork" class="Doctrine\ODM\MongoDB\UnitOfWork" public="false">
+            <factory service="doctrine.odm.mongodb.document_manager" method="getUnitOfWork"/>
         </service>
 
         <service id="sylius.repository.taxonomy" class="%sylius.repository.taxonomy.class%">
@@ -46,12 +38,8 @@
         </service>
 
         <service id="sylius.manager.taxon" alias="doctrine.odm.mongodb.document_manager" />
-        <service id="sylius.doctrine.odm.mongodb.metadata.taxon"
-                factory-service="sylius.manager.taxon"
-                factory-method="getClassMetadata"
-                class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata"
-                public="false"
-        >
+        <service id="sylius.doctrine.odm.mongodb.metadata.taxon" class="Doctrine\ODM\MongoDB\Mapping\ClassMetadata" public="false">
+            <factory service="sylius.manager.taxon" method="getClassMetadata"/>
             <argument>%sylius.model.taxon.class%</argument>
         </service>
         <service id="sylius.repository.taxon" class="%sylius.repository.taxon.class%">

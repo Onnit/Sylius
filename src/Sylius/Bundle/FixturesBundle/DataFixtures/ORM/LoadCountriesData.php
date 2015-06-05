@@ -87,7 +87,10 @@ class LoadCountriesData extends DataFixture
         $countries = Intl::getRegionBundle()->getCountryNames();
 
         foreach ($countries as $isoName => $name) {
-            $country = $countryRepository->createNew();
+            $country = $countryRepository->findOneByIsoName($isoName);
+            if ( !$country ) {
+                $country = $countryRepository->createNew();
+            }
 
             $country->setIsoName($isoName);
 

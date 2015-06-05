@@ -61,7 +61,7 @@
         </one-to-many>
 
         <many-to-one field="customer" target-entity="Sylius\Component\User\Model\CustomerInterface" inversed-by="orders">
-            <join-column name="customer_id" referenced-column-name="customers_id" nullable="true" />
+            <join-column name="customer_id" referenced-column-name="id" nullable="true" />
             <cascade>
                 <cascade-persist />
             </cascade>

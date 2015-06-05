@@ -18,11 +18,11 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
-        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user">
-            <cascade>
-                <cascade-all />
-            </cascade>
-        </one-to-many>
+        <!-- <one&#45;to&#45;many field="oauthAccounts" target&#45;entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped&#45;by="user"> -->
+        <!--     <cascade> -->
+        <!--         <cascade&#45;all /> -->
+        <!--     </cascade> -->
+        <!-- </one&#45;to&#45;many> -->
 
         <many-to-many field="authorizationRoles" target-entity="Sylius\Component\Rbac\Model\RoleInterface">
             <join-table name="sylius_user_role">

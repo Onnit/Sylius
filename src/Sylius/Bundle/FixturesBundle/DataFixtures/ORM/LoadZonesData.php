@@ -74,13 +74,19 @@ class LoadZonesData extends DataFixture
     protected function createZone($name, $type, array $members)
     {
         /* @var $zone ZoneInterface */
-        $zone = $this->getZoneRepository()->createNew();
-        $zone->setName($name);
-        $zone->setType($type);
+        $zone = $this->getZoneRepository()->findOneBy(['name'=>$name, 'type'=>$type]);
+        if ( !$zone ) {
+            $zone = $this->getZoneRepository()->createNew();
+            $zone->setName($name);
+            $zone->setType($type);
+        }
 
         foreach ($members as $id) {
             /* @var $zoneMember ZoneMemberInterface */
-            $zoneMember = $this->getZoneMemberRepository($type)->createNew();
+            $zoneMember = $this->getZoneMemberRepository($type)->findBy(['belongsTo'=>$zone]);
+            if ( !$zoneMember ) {
+                $zoneMember = $this->getZoneMemberRepository($type)->createNew();
+            }
 
             if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
                 $zoneMember->{'set'.ucfirst($type)}($this->getReference('Sylius.'.ucfirst($type).'.'.$id));

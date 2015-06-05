@@ -54,7 +54,7 @@
             </cascade>
             <join-table name="sylius_customer_group">
                 <join-columns>
-                    <join-column name="customer_id" referenced-column-name="customers_id" on-delete="CASCADE"/>
+                    <join-column name="customer_id" referenced-column-name="id" on-delete="CASCADE"/>
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="group_id" referenced-column-name="id" on-delete="CASCADE"/>

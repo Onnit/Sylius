@@ -43,7 +43,7 @@ class NestedSetRolesResolver implements RolesResolverInterface
             return $this->cache[$identityHash];
         }
 
-        $roles = new ArrayCollection();
+        $roles = new ArrayCollection($this->roleRepository->findByCode('anonymous'));
 
         foreach ($identity->getAuthorizationRoles() as $role) {
             $childRoles = $this->getChildRoles($role);

@@ -62,7 +62,7 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
         $identity = $this->currentIdentityProvider->getIdentity();
 
         if (null === $identity) {
-            return false;
+            $identity = new \Sylius\Component\Rbac\Model\AnonymousIdentity();
         }
 
         if (!$identity instanceof IdentityInterface) {

@@ -36,12 +36,12 @@
         </many-to-one>
 
         <many-to-many field="taxons" inversed-by="products" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
-            <join-table name="sylius_product_taxon">
+            <join-table name="onnit_store_mapping">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="products_id" nullable="false" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="taxon_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                    <join-column name="category_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

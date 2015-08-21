@@ -31,9 +31,6 @@ class StaticContentType extends AbstractResourceType
             ->add('publishable', null, array(
                 'label' => 'sylius.form.static_content.publishable'
             ))
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.static_content.id'
-            ))
             ->add('parent', null, array(
                 'label' => 'sylius.form.static_content.parent'
             ))
